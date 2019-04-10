@@ -1,34 +1,35 @@
 
-    var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
-    var values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    var cards = new Array();
 
     function createCards()
     {
-        cards = new Array();
-        for (var i = 0 ; i < values.length; i++)
+        const suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
+        const titles = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+        const cards = new Array();
+
+        for (let i = 0 ; i < titles.length; i++)
         {
-            for(var x = 0; x < suits.length; x++)
+            for(let j = 0; j < suits.length; j++)
             {
-                var realCardValue = parseInt(values[i]);
-                if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
-                    realCardValue = 10;
-                if (values[i] == "A")
-                    realCardValue = 11;
-                var card = { value: values[i], suit: suits[x], realCardValue: realCardValue };
+                let value = parseInt(titles[i]);
+                if (titles[i] == "J" || titles[i] == "Q" || titles[i] == "K")
+                    value = 10;
+                if (titles[i] == "A")
+                    value = 11;
+                let card = { title: titles[i], suit: suits[j], value: value };
                 cards.push(card);
             }
         }
+        return cards
     }
 
-        function shuffle()
+        function shuffle(cards)
     {
 
-        for (var i = 0; i < 200; i++)
+        for (let i = 0; i < 200; i++)
         {
-            var firstCardLocation = Math.floor((Math.random() * cards.length));
-            var secondCardLocation = Math.floor((Math.random() * cards.length));
-            var temporary = cards[firstCardLocation];
+            let firstCardLocation = Math.floor((Math.random() * cards.length));
+            let secondCardLocation = Math.floor((Math.random() * cards.length));
+            let temporary = cards[firstCardLocation];
 
             cards[firstCardLocation] = cards[secondCardLocation];
             cards[secondCardLocation] = temporary;
@@ -36,6 +37,6 @@
 
     }
 
-    createCards()
-    shuffle()
-    console.log(cards)
+    const cards=createCards();
+    shuffle(cards);
+    console.log(cards);
