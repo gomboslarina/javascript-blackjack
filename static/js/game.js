@@ -146,6 +146,20 @@ let standEventHandler = function (cards) {
     }
 };
 
+function checkWinner() {
+    const game = document.querySelector(".container");
+    let dealerSum = parseInt(game.dataset.dealerSum);
+    console.log(dealerSum);
+    let playerSum = parseInt(game.dataset.playerSum);
+    console.log(playerSum);
+    if (playerSum > dealerSum && playerSum <= 21) {
+        console.log("You won")
+    } else if (playerSum < dealerSum) {
+        console.log("You lost")
+    } else {
+        console.log("Draw")
+    }
+}
 
 function main() {
 
@@ -156,7 +170,7 @@ function main() {
     hit.addEventListener("click", hitEventHandler(cards));
     const stand = document.querySelector("#stand");
     stand.addEventListener("click", standEventHandler(cards));
-
+    checkWinner()
 
 }
 
