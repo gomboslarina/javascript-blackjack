@@ -45,7 +45,7 @@ function shuffle(cards) {
 
 function createCardElement (card, field) {
     const cardElement = document.createElement("div");
-    cardElement.id="card";
+    cardElement.className="mycard";
 
     const title = document.createElement("div");
     title.setAttribute("class","title");
@@ -61,18 +61,54 @@ function createCardElement (card, field) {
     document.querySelector(field).appendChild(cardElement);
 }
 
-let cards = createCards();
-cards = shuffle(cards);
-let index = 0;
+function createCardElementFold (card) {
+    const cardElement = document.createElement("div");
+    cardElement.className="first-card";
+    const title = document.createElement("div");
+    title.setAttribute("class","title");
+    title.textContent = card.title;
+    title.style.visibility = "hidden";
+    cardElement.appendChild(title);
 
-createCardElement(cards[index], "#dealer-cards");
-index ++;
-createCardElement(cards[index], "#dealer-cards");
-index ++;
-createCardElement(cards[index], "#player-cards");
-index ++;
-createCardElement(cards[index], "#player-cards");
-index ++;
+    const image = document.createElement("img");
+    image.setAttribute("class","image");
+    const img = `static/image/${card.suit}.png`;
+    image.setAttribute("src" , img);
+    image.style.visibility = "hidden";
+    cardElement.appendChild(image);
+
+    document.querySelector("#dealer-cards").appendChild(cardElement);
+}
+
+
+function initGame(cards) {
+
+
+    createCardElementFold(cards[0]);
+    createCardElement(cards[1], "#dealer-cards");
+
+    createCardElement(cards[2], "#player-cards");
+    createCardElement(cards[3], "#player-cards");
+
+    const dealerSum = cards[0].value + cards[1].value;
+    const playerSum = cards[2].value + cards[3].value;
+
+    document.querySelector(".container").setAttribute("data-player-sum", playerSum);
+    document.querySelector(".container").setAttribute("data-dealer-sum",dealerSum);
+    document.querySelector(".container").setAttribute("data-index", 4);
+
+}
+
+
+function main() {
+    let cards = createCards();
+    cards = shuffle(cards);
+    initGame(cards);
+    
+
+}
+
+main();
 
 
 
