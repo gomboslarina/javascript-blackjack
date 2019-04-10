@@ -3,7 +3,7 @@
     var values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
     var cards = new Array();
 
-    function createCardDeck()
+    function createCards()
     {
         cards = new Array();
         for (var i = 0 ; i < values.length; i++)
@@ -36,6 +36,6 @@
 
     }
 
-    createCardDeck()
+    createCards()
     shuffle()
     console.log(cards)
