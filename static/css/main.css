@@ -1,0 +1,14 @@
+html {
+    background-image: url("bigstock-poker-table-background-26587844-2-1.jpg");
+    background-color: green;
+}
+
+.container {
+    border-color: #1b1e21;
+    grid-template-rows: 100px 4em 200px;
+}
+
+.row {
+    height: 250px;
+    text-align: center;
+}
