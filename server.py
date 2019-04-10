@@ -8,7 +8,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('gameplay')
+@app.route('/gameplay')
 def black_jack():
     return render_template("game.html")
 

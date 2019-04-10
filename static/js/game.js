@@ -39,9 +39,11 @@ function shuffle(cards) {
         cards[firstCardLocation] = cards[secondCardLocation];
         cards[secondCardLocation] = temporary;
     }
+
+    return cards
 }
 
-function createCardElement (card) {
+function createCardElement (card, field) {
     const cardElement = document.createElement("div");
     cardElement.id="card";
 
@@ -56,7 +58,24 @@ function createCardElement (card) {
     image.setAttribute("src" , img);
     cardElement.appendChild(image);
 
-    document.querySelector("#container").appendChild(cardElement);
+    document.querySelector(field).appendChild(cardElement);
 }
+
+let cards = createCards();
+cards = shuffle(cards);
+let index = 0;
+
+createCardElement(cards[index], "#dealer-cards");
+index ++;
+createCardElement(cards[index], "#dealer-cards");
+index ++;
+createCardElement(cards[index], "#player-cards");
+index ++;
+createCardElement(cards[index], "#player-cards");
+index ++;
+
+
+
+
 
 
