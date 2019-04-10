@@ -21,5 +21,21 @@
         }
     }
 
+        function shuffle()
+    {
+
+        for (var i = 0; i < 200; i++)
+        {
+            var firstCardLocation = Math.floor((Math.random() * cards.length));
+            var secondCardLocation = Math.floor((Math.random() * cards.length));
+            var temporary = cards[firstCardLocation];
+
+            cards[firstCardLocation] = cards[secondCardLocation];
+            cards[secondCardLocation] = temporary;
+        }
+
+    }
+
     createCardDeck()
+    shuffle()
     console.log(cards)
