@@ -10,7 +10,7 @@ function createCardElement (card) {
 
     const image = document.createElement("img");
     image.setAttribute("class","image");
-    const img = `static/image/${card.image}.png`;
+    const img = `static/image/${card.suit}.png`;
     image.setAttribute("src" , img);
     cardElement.appendChild(image);
 
@@ -19,7 +19,7 @@ function createCardElement (card) {
 }
 const card = {
     title: "5",
-    image: "heart"
+    suit: "club"
 };
 createCardElement(card);
 
