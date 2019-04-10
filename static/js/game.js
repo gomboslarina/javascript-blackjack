@@ -99,11 +99,63 @@ function initGame(cards) {
 
 }
 
+function makeFirstCardVisible() {
+    let firstCardTitle = document.querySelector(".first-card .title");
+    let firstCardImage = document.querySelector(".first-card .image");
+    firstCardTitle.style.visibility = "visible";
+    firstCardImage.style.visibility = "visible";
+}
+
+let hitEventHandler = function (cards) {
+    return function (event) {
+        const game = document.querySelector(".container");
+        let index = game.dataset.index;
+        let playerSum = parseInt(game.dataset.playerSum);
+
+        playerSum += cards[index].value;
+        game.setAttribute("data-player-sum", playerSum);
+        createCardElement(cards[index++], "#player-cards");
+        game.setAttribute("data-index", index);
+
+        if (playerSum >21) {
+            let button = document.getElementById("hit");
+            button.disabled = true;
+            makeFirstCardVisible();
+        }
+    }
+};
+
+let standEventHandler = function (cards) {
+    return function (event) {
+
+        setTimeout(makeFirstCardVisible,1000);
+        const game = document.querySelector(".container");
+        let index = game.dataset.index;
+        let playerSum = parseInt(game.dataset.playerSum);
+        if (playerSum <= 21) {
+
+            let dealerSum = parseInt(game.dataset.dealerSum);
+            while (dealerSum < playerSum && dealerSum < 21) {
+                dealerSum += cards[index].value;
+                createCardElement(cards[index++], "#dealer-cards");
+
+                game.setAttribute("data-index", index);
+                game.setAttribute("data-dealer-sum", dealerSum);
+            }
+        }
+    }
+};
+
 
 function main() {
+
     let cards = createCards();
     cards = shuffle(cards);
     initGame(cards);
+    const hit = document.querySelector("#hit");
+    hit.addEventListener("click", hitEventHandler(cards));
+    const stand = document.querySelector("#stand");
+    stand.addEventListener("click", standEventHandler(cards));
 
 
 }
