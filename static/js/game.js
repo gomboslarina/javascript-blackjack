@@ -65,6 +65,7 @@ let cards = createCards();
 cards = shuffle(cards);
 let index = 0;
 
+
 createCardElement(cards[index], "#dealer-cards");
 index ++;
 createCardElement(cards[index], "#dealer-cards");
