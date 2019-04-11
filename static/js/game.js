@@ -107,7 +107,6 @@ function makeFirstCardVisible() {
 }
 
 let hitEventHandler = function (cards) {
-    return function (event) {
         const game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
@@ -118,16 +117,11 @@ let hitEventHandler = function (cards) {
         game.setAttribute("data-index", index);
 
         if (playerSum >21) {
-            let button = document.getElementById("hit");
-            button.disabled = true;
-            makeFirstCardVisible();
+            standEventHandler(cards);
         }
-    }
 };
 
 let standEventHandler = function (cards) {
-    return function (event) {
-
         setTimeout(makeFirstCardVisible,1000);
         let buttonHit = document.getElementById("hit");
         buttonHit.disabled = true;
@@ -147,7 +141,7 @@ let standEventHandler = function (cards) {
                 game.setAttribute("data-dealer-sum", dealerSum);
             }
         }
-    }
+        checkWinner();
 };
 
 function checkWinner() {
@@ -156,12 +150,12 @@ function checkWinner() {
     console.log(dealerSum);
     let playerSum = parseInt(game.dataset.playerSum);
     console.log(playerSum);
-    if (playerSum > dealerSum && playerSum <= 21) {
+    if ((playerSum > dealerSum && playerSum <= 21) || dealerSum > 21) {
         console.log("You won")
-    } else if (playerSum < dealerSum) {
-        console.log("You lost")
-    } else {
+    } else if (playerSum === dealerSum) {
         console.log("Draw")
+    } else {
+        console.log("You lost")
     }
 }
 
@@ -171,11 +165,9 @@ function main() {
     cards = shuffle(cards);
     initGame(cards);
     const hit = document.querySelector("#hit");
-    hit.addEventListener("click", hitEventHandler(cards));
+    hit.addEventListener("click", () => hitEventHandler(cards));
     const stand = document.querySelector("#stand");
-    stand.addEventListener("click", standEventHandler(cards));
-    checkWinner()
-
+    stand.addEventListener("click", () => standEventHandler(cards));
 }
 
 main();
