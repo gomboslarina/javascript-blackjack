@@ -95,12 +95,14 @@ function initGame(cards) {
     let dealerSum = cards[0].value;
     changeAceValue(cards[1],dealerSum);
     dealerSum += cards[1].value;
+    createPoints("dealer-points", dealerSum-cards[0].value);
 
-    let playerSum = cards[2].value;
-    changeAceValue(cards[3], playerSum);
-    playerSum += cards[3].value;
+    // let playerSum = cards[2].value;
+    let playerSum = 21;
+    // changeAceValue(cards[3], playerSum);
+    // playerSum += cards[3].value;
     createPoints("player-points", playerSum);
-    if (playerSum >= 21) {
+    if (playerSum === 21) {
             standEventHandler(cards);
         }
 
@@ -118,9 +120,10 @@ function makeFirstCardVisible() {
 }
 
 let hitEventHandler = function (cards) {
-        const game = document.querySelector(".container");
+        let game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
+        console.log(playerSum);
 
         changeAceValue(cards[index], playerSum);
         playerSum += cards[index].value;
@@ -141,13 +144,15 @@ let standEventHandler = function (cards) {
         buttonHit.disabled = true;
         let buttonStand = document.getElementById("stand");
         buttonStand.disabled = true;
-        const game = document.querySelector(".container");
+        let game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
         let dealerSum = parseInt(game.dataset.dealerSum);
+        console.log(game);
+        console.log(playerSum);
         if (playerSum <= 21) {
 
-            while (dealerSum < playerSum && dealerSum < 21) {
+            while ((dealerSum < playerSum) && dealerSum < 21) {
                 changeAceValue(cards[index], dealerSum);
                 dealerSum += cards[index].value;
                 createCardElement(cards[index++], "#dealer-cards");
@@ -163,20 +168,18 @@ let standEventHandler = function (cards) {
 function checkWinner() {
     const game = document.querySelector(".container");
     let dealerSum = parseInt(game.dataset.dealerSum);
-    console.log(dealerSum);
     let playerSum = parseInt(game.dataset.playerSum);
-    console.log(playerSum);
     if ((playerSum > dealerSum && playerSum <= 21) || dealerSum > 21) {
-        finalMessage("Congrats, you won!")
+        document.querySelector(".modal-body").textContent="Congrats, you won!"
     } else if (playerSum === dealerSum) {
-        finalMessage("It's a DRAW!")
+        document.querySelector(".modal-body").textContent="It's a DRAW!"
     } else {
-        finalMessage("BOOOO! Loser!")
+        document.querySelector(".modal-body").textContent="BOOOOO! Loser!"
     }
+    $("#exampleModalCenter").modal("show");
 }
 
 function finalMessage(message) {
-
     document.querySelector(".endgame").style.display = "block";
     document.querySelector(".endgame .text").innerText = message;
 }

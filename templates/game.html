@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="container align-content-center">
+    <div class="container container-fluid align-content-center">
       <div class="row">
-        <div id="dealer-cards"  class="col-8">
+        <div id="dealer-cards"  class="col-9">
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <h3>Dealer's Points:</h3>
             <div id="dealer-points">
 
@@ -26,9 +26,9 @@
         </div>
       </div>
       <div class="row">
-        <div id="player-cards" class="col-8">
+        <div id="player-cards" class="col-9">
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <h3>{{ player_name }}'s Points:</h3>
             <div id="player-points">
             </div>
@@ -37,5 +37,23 @@
     <div class="endgame">
         <div class="text"></div>
     </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+{#          <div class="modal-header">#}
+{#            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>#}
+{#            <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#              <span aria-hidden="true">&times;</span>#}
+{#            </button>#}
+{#          </div>#}
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 {% endblock %}
