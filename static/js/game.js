@@ -43,8 +43,11 @@ function shuffle(cards) {
     return cards
 }
 
+
 function createCardElement (card, field) {
     const cardElement = document.createElement("div");
+    cardElement.style.animationName = "indexAnimation";
+    cardElement.style.animationDuration = "0.8s";
     cardElement.className="mycard";
 
     const title = document.createElement("div");
@@ -62,7 +65,10 @@ function createCardElement (card, field) {
 }
 
 function createCardElementFold (card) {
+
     const cardElement = document.createElement("div");
+    cardElement.style.animationName = "indexAnimation";
+    cardElement.style.animationDuration = "0.8s";
     cardElement.className="first-card";
     const title = document.createElement("div");
     title.setAttribute("class","title");
@@ -151,6 +157,7 @@ let standEventHandler = function (cards) {
             while ((dealerSum < playerSum) && dealerSum < 21) {
                 changeAceValue(cards[index], dealerSum);
                 dealerSum += cards[index].value;
+
                 createCardElement(cards[index++], "#dealer-cards");
 
                 game.setAttribute("data-index", index);
@@ -158,7 +165,8 @@ let standEventHandler = function (cards) {
             }
         }
         createPoints("dealer-points", dealerSum);
-        checkWinner();
+        setTimeout(checkWinner,2000);
+
 };
 
 function checkWinner() {
@@ -168,12 +176,24 @@ function checkWinner() {
     if ((playerSum > dealerSum && playerSum <= 21) || dealerSum > 21) {
         document.querySelector(".modal-body").textContent="Congrats, you won!"
     } else if (playerSum === dealerSum) {
-        document.querySelector(".modal-body").textContent="It's a DRAW!"
+        document.querySelector(".modal-body").textContent="Not yet, it's DRAW!"
     } else {
         document.querySelector(".modal-body").textContent="BOOOOO! Loser!"
     }
     $("#exampleModalCenter").modal("show");
 }
+
+function restartGame() {
+    let restart = document.getElementById("restart");
+    restart.addEventListener("click", () => window.location.reload())
+}
+
+
+function closeGame() {
+    let close = document.getElementById("close");
+    close.addEventListener("click", () => window.location.replace("http://127.0.0.1:5000"));
+}
+
 
 function finalMessage(message) {
     document.querySelector(".endgame").style.display = "block";
@@ -189,7 +209,7 @@ function changeAceValue(card, whoseSum) {
    if ( card.title ==="A" && whoseSum > 10) {
        card.value = 1;
    }
-};
+}
 
 
 function main() {
@@ -201,6 +221,8 @@ function main() {
     hit.addEventListener("click", () => hitEventHandler(cards));
     const stand = document.querySelector("#stand");
     stand.addEventListener("click", () => standEventHandler(cards));
+    restartGame();
+    closeGame();
 }
 
 main();

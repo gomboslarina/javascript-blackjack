@@ -1,9 +1,12 @@
 body {
+    animation-name: indexAnimation;
+    animation-duration: 3s;
     background-image: url("/static/image/bigstock-poker-table-background-26587844-2-1.jpg");
     text-align: center;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: sans-serif;
+
 
 }
 
@@ -114,7 +117,7 @@ body {
 }
 
 
-.button{
+.button, .button-end{
 	/* background styles */
     border-color: goldenrod;
     color: black;
@@ -158,8 +161,11 @@ body {
     border-color: slategrey;
     background: linear-gradient(slategrey,darkgrey);}
 
+
 h1 {
     font-size: 4em;
+    color: lightgrey;
+    font-weight: bolder;
 }
 
 #dealer-points,#player-points {
@@ -177,6 +183,7 @@ h1 {
 
 h3 {
     color: white;
+    font-weight: bold;
     padding: 20px;
 }
 
@@ -226,4 +233,25 @@ label {
     border-radius: 5px;
     color: white;
     font-size: 2em;
+}
+
+@keyframes indexAnimation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.suzuki {
+    width: 50px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.modal-content {
+    background-color: goldenrod;
+    height: 300px;
+    font-size: 4em;
+    font-weight: bold;
 }
