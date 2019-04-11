@@ -83,6 +83,7 @@ function createCardElementFold (card) {
 
 
 function initGame(cards) {
+    document.querySelector(".endgame").style.display = "none";
 
 
     createCardElementFold(cards[0]);
@@ -166,12 +167,18 @@ function checkWinner() {
     let playerSum = parseInt(game.dataset.playerSum);
     console.log(playerSum);
     if ((playerSum > dealerSum && playerSum <= 21) || dealerSum > 21) {
-        console.log("You won")
+        finalMessage("Congrats, you won!")
     } else if (playerSum === dealerSum) {
-        console.log("Draw")
+        finalMessage("It's a DRAW!")
     } else {
-        console.log("You lost")
+        finalMessage("BOOOO! Loser!")
     }
+}
+
+function finalMessage(message) {
+
+    document.querySelector(".endgame").style.display = "block";
+    document.querySelector(".endgame .text").innerText = message;
 }
 
 function createPoints(pointElementId, whoseSum) {
