@@ -129,6 +129,10 @@ let standEventHandler = function (cards) {
     return function (event) {
 
         setTimeout(makeFirstCardVisible,1000);
+        let buttonHit = document.getElementById("hit");
+        buttonHit.disabled = true;
+        let buttonStand = document.getElementById("stand");
+        buttonStand.disabled = true;
         const game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
