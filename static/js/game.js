@@ -78,6 +78,7 @@ function createCardElementFold (card) {
     cardElement.appendChild(image);
 
     document.querySelector("#dealer-cards").appendChild(cardElement);
+
 }
 
 
@@ -133,7 +134,8 @@ let hitEventHandler = function (cards) {
 };
 
 let standEventHandler = function (cards) {
-        setTimeout(makeFirstCardVisible,1000);
+
+        makeFirstCardVisible();
         let buttonHit = document.getElementById("hit");
         buttonHit.disabled = true;
         let buttonStand = document.getElementById("stand");

@@ -1,7 +1,8 @@
 body {
     background-image: url("/static/image/bigstock-poker-table-background-26587844-2-1.jpg");
-    background-color: green;
     text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -149,4 +150,20 @@ body {
 
 .button:hover{
 	background: linear-gradient(goldenrod,darkgoldenrod);
+}
+
+.button:disabled {
+    border-color: slategrey;
+    background: linear-gradient(slategrey,darkgrey);}
+
+h1 {
+    font-size: 4em;
+}
+
+#dealer-points,#player-points {
+    font-size: 4em;
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    border: 2px solid #000;
 }
