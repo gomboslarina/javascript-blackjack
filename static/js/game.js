@@ -97,18 +97,17 @@ function initGame(cards) {
     dealerSum += cards[1].value;
     createPoints("dealer-points", dealerSum-cards[0].value);
 
-    // let playerSum = cards[2].value;
-    let playerSum = 21;
-    // changeAceValue(cards[3], playerSum);
-    // playerSum += cards[3].value;
+    let playerSum = cards[2].value;
+    changeAceValue(cards[3], playerSum);
+    playerSum += cards[3].value;
     createPoints("player-points", playerSum);
+    document.querySelector(".container").setAttribute("data-player-sum", playerSum);
+    document.querySelector(".container").setAttribute("data-dealer-sum",dealerSum);
+    document.querySelector(".container").setAttribute("data-index", 4);
     if (playerSum === 21) {
             standEventHandler(cards);
         }
 
-    document.querySelector(".container").setAttribute("data-player-sum", playerSum);
-    document.querySelector(".container").setAttribute("data-dealer-sum",dealerSum);
-    document.querySelector(".container").setAttribute("data-index", 4);
 
 }
 
@@ -123,7 +122,6 @@ let hitEventHandler = function (cards) {
         let game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
-        console.log(playerSum);
 
         changeAceValue(cards[index], playerSum);
         playerSum += cards[index].value;
@@ -148,8 +146,6 @@ let standEventHandler = function (cards) {
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
         let dealerSum = parseInt(game.dataset.dealerSum);
-        console.log(game);
-        console.log(playerSum);
         if (playerSum <= 21) {
 
             while ((dealerSum < playerSum) && dealerSum < 21) {
