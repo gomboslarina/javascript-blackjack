@@ -92,6 +92,7 @@ function initGame(cards) {
 
     const dealerSum = cards[0].value + cards[1].value;
     const playerSum = cards[2].value + cards[3].value;
+    createPoints("player-points", playerSum);
 
     document.querySelector(".container").setAttribute("data-player-sum", playerSum);
     document.querySelector(".container").setAttribute("data-dealer-sum",dealerSum);
@@ -114,6 +115,7 @@ let hitEventHandler = function (cards) {
         playerSum += cards[index].value;
         game.setAttribute("data-player-sum", playerSum);
         createCardElement(cards[index++], "#player-cards");
+        createPoints("player-points", playerSum);
         game.setAttribute("data-index", index);
 
         if (playerSum >21) {
@@ -130,9 +132,9 @@ let standEventHandler = function (cards) {
         const game = document.querySelector(".container");
         let index = game.dataset.index;
         let playerSum = parseInt(game.dataset.playerSum);
+        let dealerSum = parseInt(game.dataset.dealerSum);
         if (playerSum <= 21) {
 
-            let dealerSum = parseInt(game.dataset.dealerSum);
             while (dealerSum < playerSum && dealerSum < 21) {
                 dealerSum += cards[index].value;
                 createCardElement(cards[index++], "#dealer-cards");
@@ -141,6 +143,7 @@ let standEventHandler = function (cards) {
                 game.setAttribute("data-dealer-sum", dealerSum);
             }
         }
+        createPoints("dealer-points", dealerSum);
         checkWinner();
 };
 
@@ -157,6 +160,11 @@ function checkWinner() {
     } else {
         console.log("You lost")
     }
+}
+
+function createPoints(pointElementId, whoseSum) {
+    const point = document.getElementById(pointElementId);
+    point.textContent= whoseSum;
 }
 
 function main() {
